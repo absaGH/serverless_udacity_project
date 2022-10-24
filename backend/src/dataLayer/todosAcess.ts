@@ -24,7 +24,7 @@ export async function createTodo(todo: TodoItem): Promise<TodoItem> {
 
 export async function updateTodoItems(updateTodoRequest: UpdateTodoRequest, userId: string, todoId: string): Promise<void> {
     await docClient.update({
-      TableName: this.todoTable,
+      TableName: todosTable,
       Key: {
         "userId": userId,
         "todoId": todoId
@@ -93,7 +93,7 @@ export async function updateTodo(todo: TodoItem): Promise<TodoItem> {
         userId: todo.userId,
         todoId: todo.todoId
       },
-      UpdateExpression: 'set attachmentUrl = :attachmentUrl',
+      UpdateExpression: 'set attachmentUrl=:attachmentUrl',
       ExpressionAttributeValues: {
           ':attachmentUrl': todo.attachmentUrl
         },
