@@ -98,9 +98,6 @@ functions:
             description: Create a new todo
             requestModels:
               'application/json': CreateTodoRequest
-          request:
-            schemas:
-              application/json: ${file(models/create-todo-model.json)}
     iamRoleStatements:
       - Effect: Allow
         Action:
