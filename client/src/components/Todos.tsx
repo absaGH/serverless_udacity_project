@@ -30,11 +30,17 @@ interface TodosState {
 }
 
 export class Todos extends React.PureComponent<TodosProps, TodosState> {
-  state: TodosState = {
-    todos: [],
-    newTodoName: '',
-    loadingTodos: true
+  constructor(TodosProps: any) {
+      super(TodosProps)
+      this.state = {
+        todos: [],
+        newTodoName: '',
+        loadingTodos: true
+      }
+      this.handleNameChange = this.handleNameChange.bind(this)
+      this.onTodoCreate = this.onTodoCreate.bind(this)
   }
+  
 
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ newTodoName: event.target.value })
@@ -53,7 +59,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
       })
       this.setState({
         todos: [...this.state.todos, newTodo],
-        newTodoName: ''
+        newTodoName:''
       })
     } catch {
       alert('Can not create empty Todo')
@@ -130,6 +136,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
               onClick: this.onTodoCreate
             }}
             fluid
+            value={this.state.newTodoName}
             actionPosition="left"
             placeholder="To change the world..."
             onChange={this.handleNameChange}
